@@ -1,19 +1,18 @@
 // User DB Model
-
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const uuid = require('../utils/utils')
 require('dotenv/config')
 const jwt = require('jsonwebtoken')
+const Post = require('./post')
 
 
 const userSchema = new mongoose.Schema({
     _id:{
-        type: 'object',
-        value: { type: 'Buffer' },
+        type: String,
+        // unique: true,
         default: () => uuid.v1(),
-        unique: true
     },
     name: {
         type: String,
@@ -56,8 +55,19 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    }]
-    
+    }]},
+    {
+    timestamps : true,
+    versionKey: false,
+    toJSON:{ virtuals:true },
+    toObject: { virtuals: true }
+})
+
+// foreign key
+userSchema.virtual('posts',{
+    ref: 'Post',
+    localField : '_id',
+    foreignField : 'user'
 })
 
 // middleware for password hashing
@@ -93,13 +103,14 @@ userSchema.methods.toJSON = function(){
     delete userObject.password
     delete userObject.tokens
     delete userObject.avatar
+    delete userObject.updatedAt
 
     return userObject
 }
 
 
 // instance method
-userSchema.methods.generateAuthTokens =  async function(){
+userSchema.methods.generateAuthToken =  async function(){
     const user = this
     const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_KEY)
     user.tokens = user.tokens.concat({ token })
@@ -107,6 +118,13 @@ userSchema.methods.generateAuthTokens =  async function(){
     return token
 
 }
+
+//deleting post with user
+userSchema.pre('remove', async function(next){
+    const user = this
+    await Post.deleteMany({ user : user._id})
+    next()
+})
 
 
 const User = mongoose.model('User', userSchema)

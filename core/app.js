@@ -3,7 +3,10 @@ require('dotenv/config')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const authRoutes = require('../api/auth')
+const authRoutes = require('../routes/auth')
+const userRoutes = require('../routes/user')
+const postRoutes = require('../routes/post')
+
 
 // Middleware to enable CORS in expressjs 
 app.use(function(req, res, next) {
@@ -14,12 +17,12 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json())
 
-app.user((req, res, next) =>{
-    res.status(503).send('Site down')
-})
-
 // Routes
 app.use('/auth', authRoutes)
+app.use('/user', userRoutes)
+app.use('/post', postRoutes)
+
+
 
 
 // db.connect
