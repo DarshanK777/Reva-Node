@@ -1,9 +1,11 @@
 // handle authentication
 const express = require('express')
 const User = require('../models/user')
+const authMiddleware = require('../utils/middlewares/auth')
+
 const router = express.Router()
 
-
+// login route
 router.post('/login', async (req, res)=>{
     try{
         const user = await User.findByCredentials(req.body.email, req.body.password) // dev defined model function
@@ -15,6 +17,7 @@ router.post('/login', async (req, res)=>{
 
 })
 
+// login register
 router.post('/register', async (req, res) =>{
     const user = new User(req.body)
     try{
@@ -28,27 +31,28 @@ router.post('/register', async (req, res) =>{
 
 })
 
-// router.post('/users/logout', auth, async (req, res)=>{
-//     try {
-//         req.user.tokens = req.user.tokens.filter((token)=>{
-//             return token.token !== req.token
-//         })
-//         await req.user.save()
-//         res.send()
-//     } catch (e) {
-//         res.status(500).send(e)
-//     }
-// })
+// logout user
+router.post('/users/logout', authMiddleware, async (req, res)=>{
+    try {
+        req.user.tokens = req.user.tokens.filter((token)=>{
+            return token.token !== req.token
+        })
+        await req.user.save()
+        res.send()
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
 
-// router.post('/users/logoutAll', auth, async (req, res)=>{
-//     try {
-//         req.user.tokens = []
-//         await req.user.save()
-//         res.send()
-//     } catch (e) {
-//         res.status(500).send(e)
-// }}
-// )
+// logout users from all devices
+router.post('/users/logoutAll', authMiddleware, async (req, res)=>{
+    try {
+        req.user.tokens = []
+        await req.user.save()
+        res.send()
+    } catch (e) {
+        res.status(500).send(e)
+}})
 
 
 module.exports = router

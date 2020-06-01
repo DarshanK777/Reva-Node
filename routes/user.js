@@ -6,9 +6,11 @@ const authMiddleware = require('../utils/middlewares/auth')
 const multer = require('multer')
 
 
+
 // read users
 router.get('/me', authMiddleware ,async (req, res)=>{
     try {
+        
         res.send(req.user)
     } catch (error) {
         res.send(error)
@@ -80,7 +82,6 @@ const avatar = multer({
     }
 })
 
-
 // avatar upload
 router.post('/me/avatar', authMiddleware, avatar.single('avatar'), async  (req, res)=>{
     const buffer = await sharp(req.file.buffer).resize({
@@ -94,7 +95,6 @@ router.post('/me/avatar', authMiddleware, avatar.single('avatar'), async  (req, 
     res.status(400).send({error : err.message})
 })
 
-
 // avataar delete
 router.delete('/me/avatar', authMiddleware, avatar.single('avatar'), async  (req, res)=>{
     req.user.avatar = undefined
@@ -103,7 +103,6 @@ router.delete('/me/avatar', authMiddleware, avatar.single('avatar'), async  (req
 }, (err, req, res, next)=>{
     res.status(400).send({error : err.message})
 })
-
 
 // avataar get
 router.get('/:id/avataar', authMiddleware, async  (req, res)=>{

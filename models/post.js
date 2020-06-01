@@ -25,6 +25,7 @@ const postSchema = new mongoose.Schema({
         type: String,
         default: ""
     }
+
 },{
     timestamps : true,
     versionKey: false,
@@ -55,6 +56,9 @@ postSchema.methods.toJSON = function(){
 
     delete postObject.likes
     delete postObject.updatedAt
+    delete postObject.id
+
+    
 
     return postObject
 }

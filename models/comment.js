@@ -1,3 +1,4 @@
+// Comment model/ Schema
 const mongoose = require('mongoose')
 const uuid = require('../utils/utils')
 
@@ -20,16 +21,29 @@ const commentSchema = new mongoose.Schema({
     },
     comment:{
         type: String,
-        default: null
     }
 },{
     timestamps : true,
     versionKey: false,
     toJSON:{ virtuals:true },
-    toObject: { virtuals: true }
+    toObject: { virtuals: true },
+    id: false
 })
 
+// json data to be send
+commentSchema.methods.toJSON = function(){
+    const comment = this
+    const commentObject = comment.toObject()
 
-const Comment = mongoose.model('Comment', commentSchema)
+    delete commentObject.post
+    delete commentObject.createdAt
+    delete commentObject.updatedAt
+
+    return commentObject
+}
+
+
+
+const Comment = mongoose.model('Comments', commentSchema)
 
 module.exports = Comment

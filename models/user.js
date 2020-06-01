@@ -126,6 +126,34 @@ userSchema.pre('remove', async function(next){
     next()
 })
 
+userSchema.virtual('followers',{
+    ref: 'Friends',
+    localField: '_id',
+    foreignField: 'user_id'
+})
+
+userSchema.virtual('following',{
+    ref: 'Friends',
+    localField: '_id',
+    foreignField: 'user_id'
+})
+
+
+userSchema.virtual('followCount',{
+    ref: 'Friends',
+    localField: '_id',
+    foreignField: 'user_id',
+    count: true
+})
+
+userSchema.virtual('followingCount',{
+    ref: 'Friends',
+    localField: '_id',
+    foreignField: 'user_id',
+    count: true
+})
+
+
 
 const User = mongoose.model('User', userSchema)
 module.exports = User

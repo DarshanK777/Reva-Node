@@ -4,17 +4,19 @@ require('dotenv/config')
 const User = require('../../models/user')
 
 const auth = async (req, res, next) =>{
-    console.log(req.header("Authorization"))
+    // console.log(req.header("Authorization"))
     try{
-        const token = req.header('Authorization').replace('Token ','')
+        const token = req.header('Authorization').replace('Bearer ','')
         const decoded = jwt.verify(token, process.env.JWT_KEY)
         const user = await User.findOne({ _id : decoded._id, 'tokens.token' : token })
-
+         
         if(!user){
             throw new Error()
         }
 
-        req.user = user
+        const userx = await user.populate('followCount').populate('followingCount').execPopulate()
+        req.user = userx
+        // console.log(users)
         next()
     }catch(err){
         res.status(401).send({

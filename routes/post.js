@@ -43,7 +43,7 @@ router.post('/', upload, authMiddleware, async (req, res)=>{
         await post.save()
         res.status(201).send('post created')
     }catch(e){
-        console.log(e)
+        // console.log(e)
         res.status(400).send(e.message)
     }
 })
@@ -72,22 +72,24 @@ router.get('/:id', authMiddleware, async (req, res)=>{
 
     try{
         const post = await Post.findById(req.params.id)
-        post.populate('comments').execPopulate()
+        await post.populate({path: 'comments', // populating the comments in post
+            select : 'post updatedAt comment ' // selecting the fields required to display
+        }).execPopulate()
+      
         if(!post){
             res.status(404).send('post not found')
         }
-        res.send(post)
+        res.send( post )
     }
     catch(e){
         res.status(500).send("Internal server error")
     }
 })
 
-
 // update a post
 router.patch('/:id', authMiddleware, async (req, res) => {
     const updates = Object.keys(req.body)
-    console.log(req.body)
+    // console.log(req.body)
     const allowedUpdates = ['caption']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
@@ -122,14 +124,15 @@ router.delete('/:id', authMiddleware, async (req, res) => {
 })
 
 
-// get comments
-router.post('/:id', authMiddleware, async (req, res)=>{
-    const post = Post.findById(req.params.id) 
+// post comments
+router.post('/comment/:id', authMiddleware, async (req, res)=>{
+    const post = await Post.findById(req.params.id) 
+    // console.log(post)
     try{
         const comment = new Comment({
             ...req.body,
-            user: req.user,
-            post,
+            user: req.user._id,
+            post: post
 
         })
         await comment.save()
@@ -139,5 +142,35 @@ router.post('/:id', authMiddleware, async (req, res)=>{
     }
 })
 
+// comment delete
+router.delete('/comment/:id', authMiddleware, async(req, res)=>{
+    try{
+        await Comment.findOneAndDelete({_id: req.params.id, user: req.user})
+        res.status(202).send({
+            delete : 'succesfull'
+        })
+    }catch(err){
+        res.status(400).send('you dont own this item')
+    }
+})
+
+// delete the comment by post owner
+router.delete('/:pid/:id', authMiddleware, async(req, res)=>{
+    try{
+        const post = Post.findOne({_id:req.params.pid, user: req.user})
+        if(!post){
+            throw new Error("You Down Own the post")
+        }
+        Comment.findByIdAndDelete(req.params.id)
+        res.status(202).send({
+            delete : 'succesfull'
+        })
+
+    }catch(err){
+        res.status(400).send({
+            error: err.message
+        })
+    }
+})
 
 module.exports = router

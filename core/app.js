@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 const authRoutes = require('../routes/auth')
 const userRoutes = require('../routes/user')
 const postRoutes = require('../routes/post')
+const friendRoutes = require('../routes/friends')
+
 
 
 // Middleware to enable CORS in expressjs 
@@ -21,6 +23,7 @@ app.use(bodyParser.json())
 app.use('/auth', authRoutes)
 app.use('/user', userRoutes)
 app.use('/post', postRoutes)
+app.use('/friends', friendRoutes)
 
 
 
