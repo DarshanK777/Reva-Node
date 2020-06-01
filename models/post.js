@@ -18,7 +18,8 @@ const postSchema = new mongoose.Schema({
     },
     likes:[
         {
-            type: String
+            type: String,
+            ref: 'User'
         }
     ],
     caption:{
@@ -54,9 +55,10 @@ postSchema.methods.toJSON = function(){
     const post = this
     const postObject = post.toObject()
 
-    delete postObject.likes
+    postObject.likes = postObject.likes.length
     delete postObject.updatedAt
     delete postObject.id
+    
 
     
 

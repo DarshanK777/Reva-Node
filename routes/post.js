@@ -43,7 +43,7 @@ router.post('/', upload, authMiddleware, async (req, res)=>{
         await post.save()
         res.status(201).send('post created')
     }catch(e){
-        // console.log(e)
+        
         res.status(400).send(e.message)
     }
 })
@@ -89,7 +89,6 @@ router.get('/:id', authMiddleware, async (req, res)=>{
 // update a post
 router.patch('/:id', authMiddleware, async (req, res) => {
     const updates = Object.keys(req.body)
-    // console.log(req.body)
     const allowedUpdates = ['caption']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
@@ -115,7 +114,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
     try {
         const post = await Post.findOneAndDelete({ _id: req.params.id, user: req.user._id })
         if (!post) {
-            res.status(404).send()
+            return res.status(404).send('no element to be deleted')
         }
         res.send(post)
     } catch (e) {
@@ -127,7 +126,6 @@ router.delete('/:id', authMiddleware, async (req, res) => {
 // post comments
 router.post('/comment/:id', authMiddleware, async (req, res)=>{
     const post = await Post.findById(req.params.id) 
-    // console.log(post)
     try{
         const comment = new Comment({
             ...req.body,
@@ -170,6 +168,38 @@ router.delete('/:pid/:id', authMiddleware, async(req, res)=>{
         res.status(400).send({
             error: err.message
         })
+    }
+})
+
+
+router.post('/like/:id', authMiddleware, async(req, res)=>{
+    try{
+        const post = await Post.findById(req.params.id)
+        const user_id = req.user._id
+
+        if(post.likes.includes(user_id)){ // if liked then, unlike
+            post.likes.pull(user_id)
+            await post.save()
+            res.send('deleted')
+        }else{
+            await (post.likes).push(req.user) // if not then, like
+            await post.save()
+            res.send('added')
+        }
+
+    }catch(err){
+        res.status(500).send({error : err.message})
+    }   
+})
+
+
+router.get('/like/:id', authMiddleware, async (req, res)=>{
+    try{
+        const post = await Post.findById(req.params.id)
+        await post.populate('likes').execPopulate()
+        res.status(200).send(post.likes)
+    }catch(err){
+        res.status(500).send(err)
     }
 })
 
