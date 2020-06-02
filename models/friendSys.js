@@ -22,8 +22,38 @@ const friendSys = mongoose.Schema({
     }
 
 },{
-    timestamp : true
+    timestamps : true,
+    id: false,
+
 })
+
+// get followers
+friendSys.methods.getFollowers = async function(user){
+    console.log('this')
+    const followers = await Friends.find({following_user_id : user, accepted: true}).select('-user_id')
+    if(!followers){
+        return []
+    }
+    return followers
+}
+
+// get followings
+friendSys.methods.getFollowing = async function(user){
+    const following = await Friends.find({user_id : user, accepted: true}).select('-following_user_id')
+    if(!following){
+        return []
+    }
+    return following
+}
+
+friendSys.methods.toJSON = function(){
+    const friends = this
+    const friendsObject = friends.toObject() 
+    delete friendsObject.updatedAt
+
+    return friendsObject
+}
+
 
 
 const Friends = mongoose.model('Friends', friendSys)

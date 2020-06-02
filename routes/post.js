@@ -171,7 +171,7 @@ router.delete('/:pid/:id', authMiddleware, async(req, res)=>{
     }
 })
 
-
+// like or unlike
 router.post('/like/:id', authMiddleware, async(req, res)=>{
     try{
         const post = await Post.findById(req.params.id)
@@ -192,7 +192,7 @@ router.post('/like/:id', authMiddleware, async(req, res)=>{
     }   
 })
 
-
+// get likes
 router.get('/like/:id', authMiddleware, async (req, res)=>{
     try{
         const post = await Post.findById(req.params.id)

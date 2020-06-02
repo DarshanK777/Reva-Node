@@ -41,8 +41,6 @@ postSchema.virtual('comments',{
     foreignField : 'post'
 })
 
-
-
 //like count
 postSchema.methods.likeCount = async function(){
     const post = this
@@ -58,9 +56,6 @@ postSchema.methods.toJSON = function(){
     postObject.likes = postObject.likes.length
     delete postObject.updatedAt
     delete postObject.id
-    
-
-    
 
     return postObject
 }

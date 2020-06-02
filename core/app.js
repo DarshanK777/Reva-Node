@@ -8,8 +8,6 @@ const userRoutes = require('../routes/user')
 const postRoutes = require('../routes/post')
 const friendRoutes = require('../routes/friends')
 
-
-
 // Middleware to enable CORS in expressjs 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");

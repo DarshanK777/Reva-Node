@@ -127,19 +127,6 @@ userSchema.pre('remove', async function(next){
     next()
 })
 
-userSchema.virtual('followers',{
-    ref: 'Friends',
-    localField: '_id',
-    foreignField: 'user_id'
-})
-
-userSchema.virtual('following',{
-    ref: 'Friends',
-    localField: '_id',
-    foreignField: 'user_id'
-})
-
-
 userSchema.virtual('followCount',{
     ref: 'Friends',
     localField: '_id',
@@ -150,7 +137,7 @@ userSchema.virtual('followCount',{
 userSchema.virtual('followingCount',{
     ref: 'Friends',
     localField: '_id',
-    foreignField: 'user_id',
+    foreignField: 'following_user_id',
     count: true
 })
 

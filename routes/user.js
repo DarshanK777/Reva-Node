@@ -1,17 +1,15 @@
 // handle user data / updation
 const express = require('express')
 const User = require('../models/user')
+const Friends = require('../models/friendSys')
 const router = express.Router()
 const authMiddleware = require('../utils/middlewares/auth')
 const multer = require('multer')
 
-
-
 // read users
 router.get('/me', authMiddleware ,async (req, res)=>{
     try {
-        
-        res.send(req.user)
+        res.send(req.user)    
     } catch (error) {
         res.send(error)
     }
@@ -26,6 +24,7 @@ router.get('/:id', authMiddleware, async (req, res)=>{
         if(!user){
             return res.status(404).send("User not found")
         }
+
         res.send(user)
     } catch(e){
         res.status(500).send("Internal server error")
@@ -66,7 +65,6 @@ router.delete('/me', authMiddleware, async (req, res) => {
         res.status(500).send()
     }
 })
-
 
 // defining multer
 const avatar = multer({

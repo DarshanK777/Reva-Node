@@ -14,9 +14,8 @@ const auth = async (req, res, next) =>{
             throw new Error()
         }
 
-        const userx = await user.populate('followCount').populate('followingCount').execPopulate()
+        const userx = await user.populate('followCount').populate('followingCount').execPopulate() //populating count
         req.user = userx
-        // console.log(users)
         next()
     }catch(err){
         res.status(401).send({
