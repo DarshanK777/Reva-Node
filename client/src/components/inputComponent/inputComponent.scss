@@ -1,0 +1,22 @@
+$borderColor : #BEBEBE;
+
+.input-elem{
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    input{
+        border: 1px solid $borderColor;
+        border-radius: 11px;
+        width: 100%;
+        margin-bottom: 5%;
+    }
+
+    #error-msg{
+        color: red;
+        text-transform: lowercase;
+        width: 100%;
+        height: fit-content;
+    }
+
+}

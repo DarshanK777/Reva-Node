@@ -1,0 +1,27 @@
+$tablet : 768px;
+$colors : (
+    primary-btn : #E89999
+);
+
+.button-elem{
+    width: auto;
+    min-width: 100px;
+    letter-spacing: 0.5px;
+    line-height: 38px;
+    padding: 0 8px;
+    font-size: 0.9em;
+    background-color: map-get( $colors, primary-btn );
+    color: white;
+    text-transform: uppercase;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+
+
+    &:hover{
+        color: green; // this has to be edited
+    }
+}
