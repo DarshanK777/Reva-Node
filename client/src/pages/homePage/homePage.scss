@@ -93,45 +93,13 @@ main{
     }
 
     section#card{
-        background: #fff;
-        width: 70%;
-        margin-left: auto;
-        margin-right: auto;
-        left: 0;
-        right: 0;
-        bottom: 60px;
-        height: 320px;
-        position: absolute;
-        border-radius: 12px;
-        border: solid #AFAFAF 1px; 
-        max-width: 280px;
-        box-shadow: 2px 3px 6px rgba(0,0,0, 0.2);
-
-        h1{
-            font-size: 1em;
-            font-weight: 400;
-            text-align: center;
-            margin-top: 0.7em;
-
-            @include tablet{
-                font-size: 1.5em;
-                font-weight: 500;
-            }
-        }
-
-        @include tablet {
-            height: 500px;
-            width: 80%;
-            max-width: 380px;
-            border-radius: 18px;
-        }
 
         @include desktop{
             grid-area: card;
             position: relative;
-            bottom: 0;
+            display: flex;
             justify-content: center;
-            align-self: center;
+            align-items: center;
         }
         
     }

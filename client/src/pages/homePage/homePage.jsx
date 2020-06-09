@@ -1,7 +1,10 @@
 import React from 'react'
 import './homePage.scss'
+// import SignIn from '../../components/signInComponent/signInComponent'
+import SignUp from '../../components/signUpComponent/signUpComponent'
 
 const HomePage = () =>{
+    // const signUp = true
     return(
         <React.Fragment>
             <div id="bg"></div>
@@ -12,10 +15,8 @@ const HomePage = () =>{
                     <p> -The image sharing web app- </p>
                 </section>
                 <section id="card">
-                    <h1>
-                    Sign In
-                    </h1>
-
+                    {/* <SignIn/> */}
+                    <SignUp/>
                 </section>
             </main>
         </React.Fragment>

@@ -1,15 +1,12 @@
 import React from 'react'
 import './headerComponent.scss'
-import ButtonElement from '../btnComponent/btnComponent'
+
 
 const Header = () =>{
     
     // current for frntend stating const vars
     const auth = false // check if user logged in
     
-    const handleOnClick = () =>{
-        // handle refirect to wherever it need to be directed
-    }
 
     return (
         <div className="header">
