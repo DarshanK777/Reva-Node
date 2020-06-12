@@ -1,6 +1,7 @@
 import React from 'react';
 // import HomePage from './pages/homePage/homePage';
-import FeedPage from './pages/feedPage/feedPage'
+import ProfilePage from './pages/profilePage/profilePage'
+// import FeedPage from './pages/feedPage/feedPage'
 import Header from './components/headerComponent/headerComponent'
 
 import './App.css';
@@ -10,7 +11,8 @@ function App() {
     <React.Fragment>
       <Header/>
       {/* <HomePage/> */}
-      <FeedPage/>
+      {/* <FeedPage/> */}
+      <ProfilePage/>
     </React.Fragment>
   )
 }

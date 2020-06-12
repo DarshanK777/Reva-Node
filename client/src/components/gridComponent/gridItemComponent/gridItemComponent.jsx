@@ -6,7 +6,7 @@ const GridItem = ({value}) =>{
     return(
        <React.Fragment>
             <div className="item">
-            <img src={value.image} class="grid-image" alt="" />
+            <img src={value.image} className="grid-image" alt="" />
             <div className="item-details">
                 <span id="details">
                     <img src="/images/01.jpg" alt=""/>

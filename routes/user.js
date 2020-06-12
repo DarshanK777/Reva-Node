@@ -75,7 +75,6 @@ const avatar = multer({
         if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
             return cb(new Error('Please Upload a proper image'))
         }
-
         cb(undefined, true)
     }
 })
