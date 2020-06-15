@@ -13,7 +13,7 @@ const EditPassword = () =>{
     })
     return(
         <div className="edit-password-container">
-            <h1>Change Password</h1>
+            {/* <h1>Change Password</h1> */}
             <form onSubmit={handleSubmit}>
                 <div className="form-input-group">
                 <InputElement type="password" onChange={handleChange} placeholder="current password" name="password" value={values.password} />

@@ -20,14 +20,13 @@ $tablet: 768px;
 .group{
     position: relative;
     width: 100%;
-    
 
     .form-input{
         background: none;
         background-color: white;
         color: $sub-color;
-        font-size: 0.8em;
-        padding: 10px 10px 10px 10px;
+        font-size: 1em;
+        padding: 15px;
         display: block;
         width: 100%;
         border: 1px solid $borderColor;
@@ -35,12 +34,13 @@ $tablet: 768px;
         margin: 25px 0;
         outline: none;
 
-        @include desktop{
-            font-size: 1em;
+        @include tablet(){
+            font-size: calc(0.8vw + 1em);
         }
 
-        @include tablet(){
-            font-size: 1em;
+        @include desktop{
+            font-size: calc(0.8vw + 0.1em);
+            padding: 15px;
         }
     }
 

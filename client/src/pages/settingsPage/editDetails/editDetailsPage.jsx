@@ -13,7 +13,7 @@ const EditDetails = () =>{
     })
     return(
         <div className="edit-details-container">
-            <h1>Edit Profile</h1>
+            {/* <h1>Edit Profile</h1> */}
             <form onSubmit={handleSubmit}>
                 <div className="form-input-group">
                     <InputElement type="text" onChange={handleChange} placeholder="username" name="username" value={values.username}/>

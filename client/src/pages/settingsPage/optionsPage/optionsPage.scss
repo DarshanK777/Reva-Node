@@ -1,0 +1,38 @@
+
+
+.options-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+   
+    .option{
+        position: relative;
+        padding: 1em;
+        font-size: calc(0.8vw + 0.3em);
+
+        .option-active-left{
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background: #CCBBBB;
+            left: 0;
+            top: 0;
+        }
+        
+        
+        .option-active-right{
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background: #CCBBBB;
+            right: 0;
+            top: 0;
+        }
+        
+        &.active{
+            background: rgba(0, 0, 0, 0.02);    
+        }
+        
+    }
+}

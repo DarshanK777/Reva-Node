@@ -19,19 +19,9 @@ $desktop: 1025px;
     padding: 2em;
     border-radius: 12px;
 
-    h1{
-        display: none;
-
-        @include desktop{
-            display: block;
-            font-size: 1.5em;
-            font-weight: 600;
-            margin-bottom: 0.5em;
-        }
-    }
 
     form{
-        width: 100%;
+        width: 60%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -39,11 +29,30 @@ $desktop: 1025px;
         
         .form-input-group{
             width: 100% ;
+            display: flex;
+            flex-direction: column;
+
+            .group{
+
+                .form-input{
+
+                    @include desktop{
+                        margin: 10px;
+                    }
+                }
+            }
         }
 
         div.button-elem{
             width: 50%;
             margin-top: 2em;
+            padding: 8px;
+            margin-bottom: 3em;
+        }
+        
+        @include desktop{
+            height: 60%;
+            justify-content: start;
         }
     }
 
@@ -52,8 +61,10 @@ $desktop: 1025px;
     }
 
     @include desktop{
-        background: #fff;
-        width: 30%;
-        border: 1px solid #CCBBBB
+       padding: 0 1em;
+       height: 100%;
+       width: 100%;
+       display: flex;
+       justify-content: center;
     }
 }
