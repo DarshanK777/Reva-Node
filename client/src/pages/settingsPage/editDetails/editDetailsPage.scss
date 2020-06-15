@@ -1,0 +1,59 @@
+$tablet: 768px;
+$desktop: 1025px;
+
+@mixin tablet {
+    @media (min-width: #{$tablet}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
+
+.edit-details-container{
+    width: 100%;
+    // background-color: #fff;
+    padding: 2em;
+    border-radius: 12px;
+
+    h1{
+        display: none;
+
+        @include desktop{
+            display: block;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 0.5em;
+        }
+    }
+
+    form{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+        .form-input-group{
+            width: 100% ;
+        }
+
+        div.button-elem{
+            width: 50%;
+            margin-top: 2em;
+        }
+    }
+
+    @include tablet{
+        width: 65%;
+    }
+
+    @include desktop{
+        background: #fff;
+        width: 30%;
+        border: 1px solid #CCBBBB
+    }
+}
