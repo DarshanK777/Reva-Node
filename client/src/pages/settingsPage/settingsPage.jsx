@@ -21,19 +21,22 @@ const SettingsPage = () =>{
             <div id="bg"></div>
             <main id="settings">
                 {
-                    width < 1024 ?
+                    width < 1025 ?
                     <React.Fragment>
                         <div className="options">
-                            <span>
+                            <span onClick={() => handleOptions(0)}>
                                 Edit Profile
                             </span>
                             <hr></hr>
-                            <span>
+                            <span onClick={() =>handleOptions(1)}>
                                 Change Password
                             </span>
                         </div>
-                        
-                        <EditDetails/> 
+                        {
+                            option === 0 ?
+                            <EditDetails/>:
+                            <EditPassword/>
+                        }
                     </React.Fragment> : 
                     <div className="settings-container">
                         <div id="header">

@@ -21,7 +21,7 @@ $desktop: 1025px;
 
 
     form{
-        width: 60%;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -51,6 +51,7 @@ $desktop: 1025px;
         }
         
         @include desktop{
+            width: 60%;
             height: 60%;
             justify-content: start;
         }
