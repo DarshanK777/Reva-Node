@@ -18,7 +18,6 @@ const SettingsPage = () =>{
 
     return (
         <React.Fragment>
-            <div id="bg"></div>
             <main id="settings">
                 {
                     width < 1025 ?

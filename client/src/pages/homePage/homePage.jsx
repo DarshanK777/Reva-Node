@@ -7,8 +7,6 @@ const HomePage = () =>{
     // const signUp = true
     return(
         <React.Fragment>
-            <div id="bg"></div>
-
             <main>
                 <section id="primary">
                     <h1>Welcome to Reva</h1>

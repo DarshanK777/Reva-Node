@@ -6,7 +6,6 @@ const ProfilePage = () =>{
 
     return(
         <React.Fragment>
-            <div id="bg"></div>
             <main id="profile">
                <section id="profile-details">
                     <section id="det">

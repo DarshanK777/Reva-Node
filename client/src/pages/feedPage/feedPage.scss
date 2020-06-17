@@ -29,22 +29,6 @@ $desktop: 1025px;
 }
 
 
-body{
-    
-    #bg{
-        clip-path: polygon(100% 0, 0 0, 0 100%);
-        background-color: color(primary);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        z-index: -1;
-        
-        @include desktop{
-            clip-path: polygon(0 0, 81% 0, 63% 100%, 0% 100%);
-        }
-    }
-}
-
 main#feed{
     padding-top: 8vh;
     height: 100vh;
