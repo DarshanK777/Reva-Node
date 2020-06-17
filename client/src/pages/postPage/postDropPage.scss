@@ -1,0 +1,84 @@
+$colors: (
+    primary: #cccccc,
+    primary-light: lighten(#8BCFFC, 40%),
+    primary-dark: darken(#8BCFFC, 40%),
+    accent: #FFF6BB,
+    shadow: #797878,
+    border : #CCBBBB
+);
+
+
+@function color($color-name) {
+    @return map-get($colors, $color-name)
+}
+
+$tablet: 768px;
+$desktop: 1025px;
+
+@mixin tablet {
+    @media (min-width: #{$tablet}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
+
+main#dropZone{
+    padding-top: 8vh;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    width: 100%;
+
+    .dropzone-container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        .dropzone{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 0.5em;
+            outline: none;
+            align-items: center;
+
+            span#a, span#b, span#c {
+                font-size: 3em;
+                color: color(primary);
+                text-shadow: 1px 2px 2px rgba(color(shadow), 0.8);
+
+                @include tablet{
+                    font-size: 5em
+                }
+
+                @include desktop{
+                    font-size: 5em;
+                    padding-right: 0.4em;
+                    margin-top: -1em;
+                }
+            }
+
+            @include tablet{
+                width: 60%;
+                height: 40%;
+            }
+
+            @include desktop{
+                height: 100%;
+                width: 100%;
+                flex-direction: row;
+            }
+        }
+    }
+}
+
