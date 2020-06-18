@@ -22,7 +22,7 @@ $tablet: 768px;
     left: 0;
     right: 0;
     bottom: 60px;
-    height: 320px;
+    min-height: 320px;
     position: absolute;
     border-radius: 12px;
     border: solid #AFAFAF 1px; 
@@ -63,7 +63,7 @@ $tablet: 768px;
     }
 
     @include tablet {
-        height: 500px;
+        min-height: 500px;
         width: 80%;
         max-width: 380px;
         border-radius: 18px;

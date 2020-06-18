@@ -2,9 +2,9 @@ import React from 'react'
 import './btnComponent.scss'
 
 const ButtonElement = ({ children, ...props}) =>(
-        <div className="button-elem">
+        <button {...props} className="button-elem" >
             {children}
-        </div>
+        </button>
 )
 
 export default ButtonElement
