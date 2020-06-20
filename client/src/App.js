@@ -4,7 +4,8 @@ import React from 'react';
 // import FeedPage from './pages/feedPage/feedPage'
 // import SettingsPage from './pages/settingsPage/settingsPage'
 // import PostDropPage from './pages/postPage/postDropPage.jsx'
-import DetailsPage from './pages/detailsPage/detailsPage'
+// import DetailsPage from './pages/detailsPage/detailsPage'
+import NotificationPage from './pages/notificationPage/notificationPage.jsx'
 import Header from './components/headerComponent/headerComponent'
 
 import './App.scss';
@@ -20,7 +21,8 @@ function App() {
       {/* <ProfilePage/> */}
       {/* <SettingsPage/> */}
       {/* <PostDropPage/> */}
-      <DetailsPage/>
+      {/* <DetailsPage/> */}
+      <NotificationPage/>
     </React.Fragment>
   )
 }

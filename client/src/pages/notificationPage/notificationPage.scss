@@ -1,0 +1,92 @@
+$desktop: 1025px;
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
+
+$tablet: 768px;
+
+@mixin tablet {
+    @media (min-width: #{$tablet}) {
+        @content;
+    }
+}
+
+main#notification-container{
+    width: 100%;
+    height: 100vh;
+    padding-top: 8vh;
+    p{
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.4em;
+    }
+
+    hr{
+        width: 30%;
+        margin: 0 auto;
+        margin-top: 0.5em;
+    }
+
+    section#notification-list{
+
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 90%;
+        margin: 0 auto;
+
+        div.notification{
+            display: flex;
+            justify-content: space-between;
+            // padding: 1em;
+            min-height: 80px;
+            height: 10%;
+            max-height: 90px;
+            width: 100%;
+        }
+
+        hr{
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 0.5em;
+        }
+
+        @include tablet{
+            width: 60%;
+        }
+
+    }
+}
+
+.notification{
+    position: relative;
+
+    span#notification-user-data{
+        width: 80%;
+        display: flex;
+        align-items: center;
+        img{
+            height: 75%;
+            border-radius: 12px;
+            margin-right: 1em;
+        }
+
+        p{
+            font-size: 1em;
+            font-weight: 400;
+        }
+    }
+
+    span#notification-time{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 0.8em;
+    }
+    
+}
