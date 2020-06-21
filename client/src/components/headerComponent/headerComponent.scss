@@ -38,4 +38,15 @@ $desktop: 1025px;
         justify-content: center;
         align-items: center;
     }
+
+    div#accesible{
+        display: flex;
+        justify-content: flex-end;
+        height: 100%;
+        width: 50%;
+            img{
+                height: 40%;
+                margin-left: 1em;
+            }
+    }
 }

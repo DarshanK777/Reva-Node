@@ -1,11 +1,13 @@
 // custom form hook
 
 import {useState} from 'react'
+import e from 'express';
 
-const useForm = (intialState ={})=>{
+const useForm = (callback, intialState ={}, validate)=>{
     const [values, setValues] = useState(intialState)
-    // const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({})
 
+    // handle change function
     const handleChange = event =>{
         const {name, value} = event.target;
         
@@ -18,9 +20,18 @@ const useForm = (intialState ={})=>{
         console.log(values)
     };
 
+    //handle submit function
     const handleSubmit = event =>{
         event.prevenDefault()
-        // callback()
+
+        if(Object.keys(validate(values)).length === 0){
+            callback()
+            setValues(intialState);
+        }else{
+            setErrors(validate(values))
+        }
+
+        callback()
     };
 
     return{

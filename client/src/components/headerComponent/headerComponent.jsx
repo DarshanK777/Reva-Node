@@ -5,7 +5,7 @@ import './headerComponent.scss'
 const Header = () =>{
     
     // current for frntend stating const vars
-    const auth = false // check if user logged in
+    const auth = true // check if user logged in
     
 
     return (
@@ -15,7 +15,11 @@ const Header = () =>{
             {
                 auth ? 
                 <div id="accesible">
-                    <img src="" alt="" />
+                    <img src="./images/01.jpg" alt="" />
+                    <img src="./images/01.jpg" alt="" />
+
+                    <img src="./images/01.jpg" alt="" />
+
 
                 </div> : null
             }

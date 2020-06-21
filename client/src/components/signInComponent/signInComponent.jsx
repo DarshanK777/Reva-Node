@@ -3,9 +3,15 @@ import './signInComponent.scss'
 import {InputElement} from '../inputComponent/inputComponent'
 import ButtonElement from '../btnComponent/btnComponent'
 import useForm from '../../utils/functions/useForm'
+import {validateLogin} from '../../utils/functions/validation'
 
 const SignIn = () =>{
-    const {handleChange, handleSubmit, values} = useForm( {email : "", password: ""})
+    const {handleChange, handleSubmit, values} = useForm( submitToServer, {email : "", password: ""}, validateLogin )
+
+    const submitToServer = () => {
+        console.log('this is called')
+        // api call
+    }
 
     return(
         <div className="signIn">
