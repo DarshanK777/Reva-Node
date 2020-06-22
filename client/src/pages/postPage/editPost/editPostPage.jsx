@@ -1,6 +1,6 @@
 import React,{useRef, useEffect} from 'react'
 import './editPost.scss'
-import { image64toCanvasRef, base64StringtoFile } from '../../../utils/functions/imageUtils'
+import { image64toCanvasRef} from '../../../utils/functions/imageUtils'
 import ButtonElement from '../../../components/btnComponent/btnComponent'
 
 const EditPostPage = (props) =>{

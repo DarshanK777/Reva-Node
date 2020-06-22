@@ -3,14 +3,23 @@ import './editPasswordPage.scss'
 import {InputElement} from '../../../components/inputComponent/inputComponent'
 import useForm from '../../../utils/functions/useForm'
 import ButtonElement from '../../../components/btnComponent/btnComponent'
+import {editPasswordValidation} from '../../../utils/functions/validation'
 
 const EditPassword = () =>{
 
-    const {handleChange, handleSubmit, values} = useForm({
+    const submitToServer = () => {
+        console.log('this is called')
+        // api call
+    }
+
+    const {handleChange, handleSubmit, values} = useForm(submitToServer, {
         password: "",
         password1: "",
         password2: ""
-    })
+    }, editPasswordValidation)
+
+    
+
     return(
         <div className="edit-password-container">
             {/* <h1>Change Password</h1> */}

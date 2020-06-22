@@ -4,8 +4,17 @@ import {InputElement} from '../inputComponent/inputComponent'
 import ButtonElement from '../btnComponent/btnComponent'
 import useForm from '../../utils/functions/useForm'
 import {validateRegister} from '../../utils/functions/validation'
+import {useDispatch} from 'react-redux'
+import {login} from '../../redux/actions/auth'
+
 
 const SignUp = () =>{
+    
+    const submitToServer = () => {
+        console.log('this is called')
+        // api call
+    }
+    
     const {handleChange, handleSubmit, values} = useForm(submitToServer, {
         username : "",
         name: "",
@@ -14,10 +23,18 @@ const SignUp = () =>{
         password2 :""
     }, validateRegister)
 
-    const submitToServer = () => {
-        console.log('this is called')
-        // api call
+    const dispatch = useDispatch()
+
+    const registerSubmit = () =>{
+        dispatch(login(
+            values.username,
+            values.email,
+            values.password,
+            values.password2
+        ))
     }
+
+    
 
     return(
         <div className="signUp">
@@ -30,7 +47,7 @@ const SignUp = () =>{
                     <InputElement type="password" onChange={handleChange} placeholder="password" name="password" value={values.password} />
                     <InputElement type="password" onChange={handleChange} placeholder="Re-enter Password" name="password2" value={values.password2} />
                 </div>
-                <ButtonElement type="button" value="submit" >Sign-Up</ButtonElement>
+                <ButtonElement type="button" value="submit" onClick={registerSubmit} >Sign-Up</ButtonElement>
             </form>
             
         </div>

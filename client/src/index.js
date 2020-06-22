@@ -10,7 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter >
       <PersistGate persistor = {persistor}>
         <App/>
       </PersistGate>

@@ -35,3 +35,13 @@ export const validateRegister = (values) =>{
     // }
     return errors;
 }
+
+export const editPasswordValidation = (values) =>{
+    let errors = {};
+
+    if (!values.password) {
+        errors.password = "Password is required";
+    } else if(values.password !== values.password2){
+        errors.password2 = "Both password doesnt match"
+    }
+}

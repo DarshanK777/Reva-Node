@@ -1,11 +1,12 @@
 // custom form hook
 
 import {useState} from 'react'
-import e from 'express';
 
 const useForm = (callback, intialState ={}, validate)=>{
     const [values, setValues] = useState(intialState)
     const [errors, setErrors] = useState({})
+
+    console.log(errors)
 
     // handle change function
     const handleChange = event =>{

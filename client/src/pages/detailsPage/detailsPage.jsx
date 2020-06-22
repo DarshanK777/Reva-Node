@@ -6,7 +6,7 @@ import {InputElement} from '../../components/inputComponent/inputComponent'
 const DetailsPage = () => {
 
     const elements = [
-        1,1,1,,11,1,1,1,1,1,1,1,11,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+        1,1,1,11,1,1,1,1,1,1,1,11,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
     ]
 
     return(
