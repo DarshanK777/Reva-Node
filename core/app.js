@@ -7,6 +7,7 @@ const authRoutes = require('../routes/auth')
 const userRoutes = require('../routes/user')
 const postRoutes = require('../routes/post')
 const friendRoutes = require('../routes/friends')
+const path = require('path')
 
 // Middleware to enable CORS in expressjs 
 app.use(function(req, res, next) {
@@ -16,6 +17,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(bodyParser.json())
+app.use('/images', express.static(path.join(__dirname, '..', 'images')));
 
 // Routes
 app.use('/auth', authRoutes)

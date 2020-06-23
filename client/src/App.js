@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import HomePage from './pages/homePage/homePage';
 import ProfilePage from './pages/profilePage/profilePage'
 import FeedPage from './pages/feedPage/feedPage'
@@ -8,11 +8,19 @@ import DetailsPage from './pages/detailsPage/detailsPage'
 import NotificationPage from './pages/notificationPage/notificationPage.jsx'
 import { Switch, Route } from 'react-router-dom';
 import Header from './components/headerComponent/headerComponent'
+import {useDispatch} from 'react-redux'
 // import PrivateRoute from './utils/privateRouteComponent/privateRouteComponent.jsx'
 import './App.scss';
+import {loadUser} from './redux/actions/auth'
 
 function App() {
-  
+
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(loadUser())
+  }, [])
+
   return (
     <React.Fragment>
       <div id="bg"></div>
@@ -20,7 +28,7 @@ function App() {
       <Header/>
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route exact path='/profile' component={ProfilePage} />
+          <Route exact path='/profile(/:uid)' component={ProfilePage} />
           <Route exact path='/feed' component={FeedPage} />
           <Route exact path='/settings' component={SettingsPage} />
           <Route exact path='/post' component={PostDropPage} />

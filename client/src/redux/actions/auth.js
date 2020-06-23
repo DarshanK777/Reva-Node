@@ -48,7 +48,6 @@ export const loadUser = () => (dispatch, getState) =>{
         console.log(err)
         dispatch({
             type: AUTH_ERROR,
-
         })
     })
 }
@@ -129,7 +128,6 @@ export const register = (username,email, password1, password2) => (dispatch) =>{
     })
 }
 
-
 // LOGOUT
 export const logout = () => (dispatch, getState) =>{
     console.log('called logout')
@@ -147,7 +145,7 @@ export const logout = () => (dispatch, getState) =>{
 
 
 export const loadUserOnUsername = (username) => (dispatch, getState) =>{
-    dispatch({type: STALK_LOADING })
+    // dispatch({type: STALK_LOADING })
 
     axios.get(`${PORT_NO}/api/user/${username}`, tokenConfig(getState))
     .then((res)=>{

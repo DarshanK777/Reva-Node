@@ -1,5 +1,5 @@
 import {USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT_SUCCESS,
-    STALK_LOADING, POST_SUCCESS, 
+    // STALK_LOADING, POST_SUCCESS, 
 } from '../actions/actionTypes'
 
 const intialState = {
@@ -52,16 +52,16 @@ export default function(state = intialState, action){
                 errors: action.payload
             }
         
-        case STALK_LOADING:
-            return{
-                ...state,
-            }
+        // case STALK_LOADING:
+        //     return{
+        //         ...state,
+        //     }
         
-        case POST_SUCCESS:
-            return{
-                ...state,
-                post_updated: true
-            }
+        // case POST_SUCCESS:
+        //     return{
+        //         ...state,
+        //         post_updated: true
+        //     }
 
         default:
             return state

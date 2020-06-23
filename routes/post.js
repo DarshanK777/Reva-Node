@@ -35,9 +35,11 @@ router.post('/', upload, authMiddleware, async (req, res)=>{
         if(!req.file){
             throw new Error("please upload a image")
             }
+        const imgPath = req.protocol + "://" + req.host + '/' + req.file.path;
+
         const post = new Post({
             user : req.user._id,
-            image : req.file.path,
+            image : imgPath,
             caption : req.body.caption
         })
         await post.save()
@@ -45,25 +47,6 @@ router.post('/', upload, authMiddleware, async (req, res)=>{
     }catch(e){
         
         res.status(400).send(e.message)
-    }
-})
-
-// get all posts by user
-router.get('/', authMiddleware, async(req, res)=>{
-    try{
-        await req.user.populate({
-            path : 'posts',
-            options : {
-                limit : parseInt(req.query.limit), // pagination
-                skip : parseInt(req.query.skip), // pagination
-                sort: { // sort order
-                    createdAt: -1 // order by
-                }
-            }
-        }).execPopulate()
-        res.send(req.user.posts)
-    }catch(e){
-        res.status(500).send()
     }
 })
 

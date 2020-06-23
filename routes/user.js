@@ -1,12 +1,12 @@
 // handle user data / updation
 const express = require('express')
 const User = require('../models/user')
-const Friends = require('../models/friendSys')
+// const Post = require('../models/post')
 const router = express.Router()
 const authMiddleware = require('../utils/middlewares/auth')
 const multer = require('multer')
 
-// read users
+// read user
 router.get('/me', authMiddleware ,async (req, res)=>{
     try {
         res.send(req.user)    
@@ -30,6 +30,7 @@ router.get('/:id', authMiddleware, async (req, res)=>{
         res.status(500).send("Internal server error")
     }
 })
+
 
 //update user
 router.patch('/me', authMiddleware, async (req, res)=>{
@@ -116,5 +117,48 @@ router.get('/:id/avataar', authMiddleware, async  (req, res)=>{
         res.status(404).send()
     }
 })
+
+// get all posts by user
+router.get('/me/post', authMiddleware, async(req, res)=>{
+    console.log(req.user)
+    try{
+        console.log(req.user)
+        await req.user.populate({
+            path : 'posts',
+            options : {
+                limit : parseInt(req.query.limit), // pagination
+                skip : parseInt(req.query.skip), // pagination
+                sort: { // sort order
+                    createdAt: -1 // order by
+                }
+            }
+        }).execPopulate()
+        res.send(req.user.posts)
+    }catch(e){
+        res.status(500).send()
+    }
+})
+
+//get all post by user based on id
+router.get('/post/:id', authMiddleware, async (req, res)=>{
+    try{
+        // console.log('inside this')
+        const user = await User.findById(req.params.id)
+        const post = user.populate({
+            path : 'posts',
+            options : {
+                limit : parseInt(req.query.limit), // pagination
+                skip : parseInt(req.query.skip), // pagination
+                sort: { // sort order
+                    createdAt: -1 // order by
+                }
+            }
+        }).execPopulate()
+        res.send(post)
+    }catch(err){
+        res.status(404).send()
+    }
+})
+
 
 module.exports = router

@@ -9,10 +9,15 @@ import {login} from '../../redux/actions/auth'
 
 
 const SignUp = () =>{
-    
+
+    const dispatch = useDispatch()
     const submitToServer = () => {
-        console.log('this is called')
-        // api call
+        dispatch(login(
+            values.username,
+            values.email,
+            values.password,
+            values.password2
+        ))
     }
     
     const {handleChange, handleSubmit, values} = useForm(submitToServer, {
@@ -23,18 +28,7 @@ const SignUp = () =>{
         password2 :""
     }, validateRegister)
 
-    const dispatch = useDispatch()
-
-    const registerSubmit = () =>{
-        dispatch(login(
-            values.username,
-            values.email,
-            values.password,
-            values.password2
-        ))
-    }
-
-    
+  
 
     return(
         <div className="signUp">
@@ -47,7 +41,7 @@ const SignUp = () =>{
                     <InputElement type="password" onChange={handleChange} placeholder="password" name="password" value={values.password} />
                     <InputElement type="password" onChange={handleChange} placeholder="Re-enter Password" name="password2" value={values.password2} />
                 </div>
-                <ButtonElement type="button" value="submit" onClick={registerSubmit} >Sign-Up</ButtonElement>
+                <ButtonElement type="button" value="submit">Sign-Up</ButtonElement>
             </form>
             
         </div>
