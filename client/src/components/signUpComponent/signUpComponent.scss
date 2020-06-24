@@ -48,15 +48,36 @@ $tablet: 768px;
  
         .form-input-group{
             input{
-                margin: 1em 0px ;
+                margin: 0px ;
+                margin-top: 1em;
             
                 @include desktop{
-                    margin: 1.5em 0px;
+                    margin: 0px;
+                    margin-top: 1.5em;
+
                 }
             
             }
         }
     }
+
+    p{
+        text-align: center;
+        margin-top: 8px;
+        font-weight: 300;
+
+        span#signUp{
+            cursor: pointer;
+            
+            &:hover{
+                font-weight: 500;
+                color: rgb(113, 203, 238);
+            }
+        
+        }
+
+    }
+   
 
     @include desktop{
         position: relative;

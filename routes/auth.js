@@ -32,7 +32,7 @@ router.post('/register', async (req, res) =>{
 })
 
 // logout user
-router.post('/users/logout', authMiddleware, async (req, res)=>{
+router.post('/user/logout', authMiddleware, async (req, res)=>{
     try {
         req.user.tokens = req.user.tokens.filter((token)=>{
             return token.token !== req.token

@@ -160,5 +160,11 @@ router.get('/post/:id', authMiddleware, async (req, res)=>{
     }
 })
 
+//user feed
+// get friendlist 
+// get 15 post from following based on timestamp desc...
+// return the posts object
+
+
 
 module.exports = router

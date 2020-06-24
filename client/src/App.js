@@ -19,6 +19,7 @@ function App() {
 
   useEffect(()=>{
     dispatch(loadUser())
+    // eslint-disable-next-line
   }, [])
 
   return (

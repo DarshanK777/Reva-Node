@@ -36,7 +36,7 @@ export const loadUserProfileByUID = async (uid) =>{
     }
 }
 
-export const loadFeed = async (uid) =>{
+export const loadProfileFeed = async (uid) =>{
     try{
         if(uid){
             const res = await axios.get(`${PORT_NO}/user/post/${uid}`, tokenConfig());

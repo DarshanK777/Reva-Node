@@ -2,12 +2,13 @@ import React, { useEffect } from 'react'
 import './profilePage.scss'
 import Grid from '../../components/gridComponent/gridComponent'
 // import { useDispatch } from 'react-redux'
-import {loadUserProfileByUID, loadFeed} from '../../utils/functions/apiCalls'
+import {loadUserProfileByUID, loadProfileFeed} from '../../utils/functions/apiCalls'
 
 const ProfilePage = (props) =>{
 
     // temp way for current user.. else looking for using the redux user state
 
+    // eslint-disable-next-line
     let user, feed = null
     let loading, feedLoading = true
 
@@ -16,13 +17,16 @@ const ProfilePage = (props) =>{
     }
 
     const loadFeeds = async(uid) => {
-        feed = await loadFeed(uid)
+        feed = await loadProfileFeed(uid)
     }
 
+   
     useEffect(()=>{
         if(user){
+            // eslint-disable-next-line
             loading = false
             loadFeeds(props.match.params.uid)
+             // eslint-disable-next-line
             feedLoading = false
         }else{
             props.match.params.uid ?

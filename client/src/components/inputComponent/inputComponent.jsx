@@ -6,7 +6,7 @@ export const InputElement = ({error, onChange, ...props}) =>(
             <input className="form-input" onChange={onChange} {...props}/> 
             {
                 error? 
-                <span id="#error-msg"> {error} </span> : 
+                <span id="error-msg"> {error} </span> : 
                 null 
             }
         </div>

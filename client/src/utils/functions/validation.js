@@ -1,6 +1,7 @@
 
 export const validateLogin = (values) =>{
     let errors = {};
+    console.log('validate')
 
     if (!values.email) {
         errors.email="Email is required"
@@ -12,6 +13,7 @@ export const validateLogin = (values) =>{
     } else if (values.password.length < 10) {
         errors.password = "Password needs to be more than 10 characters";
     }
+    console.log(errors)
     return errors;
 }
 
@@ -28,6 +30,9 @@ export const validateRegister = (values) =>{
         errors.password = "Password is required";
     } else if(values.password !== values.password2){
         errors.password2 = "Both password doesnt match"
+    }
+    if(!values.name){
+        errors.name="Name is required"
     }
     
     // } else if (values.password.length < 10) {

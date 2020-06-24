@@ -131,7 +131,7 @@ router.delete('/comment/:id', authMiddleware, async(req, res)=>{
             delete : 'succesfull'
         })
     }catch(err){
-        res.status(400).send('you dont own this item')
+        res.status(400).send('Unauthorised access')
     }
 })
 

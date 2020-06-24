@@ -8,8 +8,6 @@ import{
     LOGOUT_SUCCESS,
     REGISTER_FAIL,
     REGISTER_SUCCESS,
-    STALK_USER,
-    STALK_LOADING
 } from './actionTypes'
 import {PORT_NO} from '../../utils/sense.jsx'
 
@@ -38,7 +36,7 @@ export const tokenConfig = (getState) => {
 export const loadUser = () => (dispatch, getState) =>{
     dispatch({ type: USER_LOADING});
 
-    axios.get(`${PORT_NO}/api/user/`, tokenConfig(getState))
+    axios.get(`${PORT_NO}/user/me`, tokenConfig(getState))
     .then(res =>{
         dispatch({
             type: USER_LOADED,
@@ -62,7 +60,7 @@ export const login = (email, password) => (dispatch) =>{
         }
     }
 
-    axios.post(`${PORT_NO}/rest-auth/login/`, {
+    axios.post(`${PORT_NO}/auth/login/`, {
         email,
         password,
     }, config)
@@ -71,6 +69,7 @@ export const login = (email, password) => (dispatch) =>{
             type: LOGIN_SUCCESS,
             payload: res.data
     });
+    dispatch(loadUser())
     }).catch(error=>{
         if (error.response) {
             console.log('01',error.response.data); 
@@ -98,7 +97,7 @@ export const register = (username,email, password1, password2) => (dispatch) =>{
         }
     }
 
-    axios.post(`${PORT_NO}/rest-auth/registration/`, {
+    axios.post(`${PORT_NO}/auth/register/`, {
         username,
         email,
         password1,
@@ -132,7 +131,7 @@ export const register = (username,email, password1, password2) => (dispatch) =>{
 export const logout = () => (dispatch, getState) =>{
     console.log('called logout')
     axios
-    .post(`${PORT_NO}/rest-auth/logout/`, null, tokenConfig(getState))
+    .post(`${PORT_NO}/users/logout`, null, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: LOGOUT_SUCCESS,
@@ -143,18 +142,3 @@ export const logout = () => (dispatch, getState) =>{
     });
 }
 
-
-export const loadUserOnUsername = (username) => (dispatch, getState) =>{
-    // dispatch({type: STALK_LOADING })
-
-    axios.get(`${PORT_NO}/api/user/${username}`, tokenConfig(getState))
-    .then((res)=>{
-        dispatch({
-            type: STALK_USER,
-            payload: res.data
-        })
-    })
-    .catch((err)=>{
-        console.log(err.response.data)
-    })
-} 

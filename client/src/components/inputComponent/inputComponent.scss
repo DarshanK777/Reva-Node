@@ -34,6 +34,7 @@ $tablet: 768px;
         margin: 25px 0;
         outline: none;
 
+
         @include tablet(){
             font-size: calc(0.8vw + 1em);
         }
@@ -42,7 +43,14 @@ $tablet: 768px;
             font-size: calc(0.8vw + 0.2em);
             padding: 12px;
         }
+
     }
 
+    span#error-msg{
+        margin: 10px;
+        font-weight: 500;
+        color: red;
+        
+    }
 
 }
