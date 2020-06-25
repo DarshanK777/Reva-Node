@@ -1,14 +1,14 @@
 import React from 'react'
 import './headerComponent.scss'
 import {withRouter} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Header = ({history}) =>{
     
     // current for frntend stating const vars
-    const auth = true // check if user logged in
+    const {isAuthenticated} = useSelector(state => state.user)
     
     const handleRoute = (route) =>{
-        console.log(route)
         return history.push(route)
     }
 
@@ -17,12 +17,11 @@ const Header = ({history}) =>{
             <p onClick={() => handleRoute("/feed")} > Reva </p>
             
             {
-                auth ? 
+                isAuthenticated ? 
                 <div id="accesible">
-                    <img src="./images/01.jpg" alt="" onClick={() => handleRoute("/post")} />
-                    <img src="./images/01.jpg" alt="" onClick={() => handleRoute("/notification")} />
-
-                    <img src="./images/01.jpg" alt="" onClick={() => handleRoute("/profile")} />
+                    <img src="./images/01.jpg" alt="a" onClick={() => handleRoute("/post")} />
+                    <img src="./images/01.jpg" alt="b" onClick={() => handleRoute("/notification")} />
+                    <img src="./images/01.jpg" alt="c" onClick={() => handleRoute("/profile")} />
 
 
                 </div> : null

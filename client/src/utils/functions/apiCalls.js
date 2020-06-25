@@ -4,7 +4,7 @@ import {PORT_NO} from '../sense'
 
 export const tokenConfig = () => {
     const state = store.getState()
-    const token = state.token
+    const token = state.user.token
     const config = {
       headers: {
         'content-Type': 'application/json',
@@ -12,19 +12,27 @@ export const tokenConfig = () => {
     };
   
     if (token) {
-      config.headers['Authorization'] = `Token ${token}`;
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
 };
 
+export const loadProfileFeed = async () =>{
+    try{
+        const res = await axios.get(`${PORT_NO}/user/me/post`, tokenConfig())
+        return res.data
+    }catch(error){
+        if(error.response){
+            return{
+                errors: error.response.data
+            }
+        }
+    }
+}
 
 export const loadUserProfileByUID = async (uid) =>{
     try{
-        if(uid){
-            const res = await axios.get(`${PORT_NO}/user/${uid}`, tokenConfig());
-            return res.data
-        }
-        const res = await axios.get(`${PORT_NO}/user/me`, tokenConfig())
+        const res = await axios.get(`${PORT_NO}/user/${uid}`, tokenConfig());
         return res.data
         
     }catch(error){
@@ -36,13 +44,9 @@ export const loadUserProfileByUID = async (uid) =>{
     }
 }
 
-export const loadProfileFeed = async (uid) =>{
+export const loadProfileFeedByUID = async (uid) =>{
     try{
-        if(uid){
-            const res = await axios.get(`${PORT_NO}/user/post/${uid}`, tokenConfig());
-            return res.data
-        }
-        const res = await axios.get(`${PORT_NO}/user/me/post`, tokenConfig())
+        const res = await axios.get(`${PORT_NO}/user/post/${uid}`, tokenConfig());
         return res.data
         
     }catch(error){
@@ -53,3 +57,4 @@ export const loadProfileFeed = async (uid) =>{
         } 
     }
 }
+

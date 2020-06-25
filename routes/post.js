@@ -35,7 +35,7 @@ router.post('/', upload, authMiddleware, async (req, res)=>{
         if(!req.file){
             throw new Error("please upload a image")
             }
-        const imgPath = req.protocol + "://" + req.host + '/' + req.file.path;
+        const imgPath = req.protocol + "://" + req.hostname + '/' + req.file.path;
 
         const post = new Post({
             user : req.user._id,
@@ -43,7 +43,7 @@ router.post('/', upload, authMiddleware, async (req, res)=>{
             caption : req.body.caption
         })
         await post.save()
-        res.status(201).send('post created')
+        res.status(201).send({'status' : 'success'})
     }catch(e){
         
         res.status(400).send(e.message)
@@ -105,7 +105,6 @@ router.delete('/:id', authMiddleware, async (req, res) => {
     }
 })
 
-
 // post comments
 router.post('/comment/:id', authMiddleware, async (req, res)=>{
     const post = await Post.findById(req.params.id) 
@@ -153,7 +152,7 @@ router.delete('/:pid/:id', authMiddleware, async(req, res)=>{
         })
     }
 })
-
+ 
 // like or unlike
 router.post('/like/:id', authMiddleware, async(req, res)=>{
     try{

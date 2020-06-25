@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import './profilePage.scss'
+import './userPage.scss'
 import Grid from '../../components/gridComponent/gridComponent'
 import { useSelector } from 'react-redux'
-import { loadProfileFeed} from '../../utils/functions/apiCalls'
+import {loadUserProfileByUID, loadProfileFeedByUID} from '../../utils/functions/apiCalls'
 
-const ProfilePage = () =>{
+const UserPage = (props) =>{
     
-    const { user } = useSelector(state => state)
+    const [user, setUser] = useState(null)
     const [feed, setFeed] = useState(null)
-
+    //005c1150-a489-11ea-9d93-43df8ce69cb3
     const loadFeed = async() => {
-        const xfeed = await loadProfileFeed()
+        const xfeed = await loadProfileFeedByUID(props.match.params.uid)
         setFeed(xfeed)
     }
 
+    const loadUser = async() => {
+        const xuser = await loadUserProfileByUID(props.match.params.uid)
+        setUser(xuser)
+    }
     useEffect(()=>{
         if(user){
-            console.log('once')
             loadFeed()
+        }else{
+            loadUser()
         }
-    }, [])
+    },[user])
 
     return(
         <React.Fragment>
@@ -59,4 +64,4 @@ const ProfilePage = () =>{
     )
 }
 
-export default ProfilePage
+export default UserPage

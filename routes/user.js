@@ -120,9 +120,9 @@ router.get('/:id/avataar', authMiddleware, async  (req, res)=>{
 
 // get all posts by user
 router.get('/me/post', authMiddleware, async(req, res)=>{
-    console.log(req.user)
+   
     try{
-        console.log(req.user)
+        
         await req.user.populate({
             path : 'posts',
             options : {

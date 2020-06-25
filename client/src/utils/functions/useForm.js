@@ -18,7 +18,7 @@ const useForm = (callback, intialState ={}, validate)=>{
             [name] : value
             }
         });
-        console.log(values)
+
     };
 
     //handle submit function

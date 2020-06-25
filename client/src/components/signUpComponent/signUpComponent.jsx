@@ -32,8 +32,7 @@ const SignUp = (props) =>{
     const changeCardParent =() =>{
         props.card('signIn')
     }
-
-  
+   
 
     return(
         <div className="signUp">

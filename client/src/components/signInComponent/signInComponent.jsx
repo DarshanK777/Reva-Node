@@ -27,7 +27,6 @@ const SignIn = (props) =>{
 
     const {handleChange, handleSubmit, values, errors} = useForm(submitToServer, {email : "", password: ""}, validateLogin )
 
-    
     return(
         <div className="signIn">
             <form onSubmit={handleSubmit}>

@@ -36,11 +36,11 @@ export const postImage = (image, caption) => async (dispatch, getState) =>{
 
   try{
     const post = await axios.post(`${PORT_NO}/api/posts/createPost/`, formData, tokenConfig(getState))
-    dispatch({type:POST_SUCCESS})
-    return post.data.message
+    // dispatch({type:POST_SUCCESS})
+    return post.data
 
   }catch(err){
-    dispatch({type: POST_FAIL}) 
+    // dispatch({type: POST_FAIL}) 
     return err
   }
 

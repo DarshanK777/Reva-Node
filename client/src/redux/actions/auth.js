@@ -10,13 +10,14 @@ import{
     REGISTER_SUCCESS,
 } from './actionTypes'
 import {PORT_NO} from '../../utils/sense.jsx'
+// import user from '../reducers/user';
 
 
 // LOAD TOKEN FUNCTION
 export const tokenConfig = (getState) => {
     
-    const token = getState().token;
-
+    const token = getState().user.token;
+    
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +26,7 @@ export const tokenConfig = (getState) => {
   
     
     if (token) {
-      config.headers['Authorization'] = `Token ${token}`;
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
   
     return config;
@@ -65,6 +66,7 @@ export const login = (email, password) => (dispatch) =>{
         password,
     }, config)
     .then(res =>{
+        console.log(res)
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
