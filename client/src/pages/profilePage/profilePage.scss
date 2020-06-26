@@ -166,5 +166,24 @@ section#det{
         }
     }
 
+    div#sub-btn{
+        padding: 0.8em 1.8em ;
+        background-color: rgb(80, 217, 235);
+        color: white;
+        border-radius: 12px;
+        outline: none;
+        margin-bottom: 0.7em;
+        cursor: pointer;
+    }
+
+    div#unsub-btn{
+        padding: 0.8em 1.8em ;
+        background-color: rgb(92, 96, 97);
+        color: white;
+        border-radius: 12px;
+        outline: none;
+        margin-bottom: 0.7em;
+        cursor: pointer;
+    }
    
 }

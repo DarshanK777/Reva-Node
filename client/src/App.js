@@ -5,7 +5,6 @@ import FeedPage from './pages/feedPage/feedPage'
 import SettingsPage from './pages/settingsPage/settingsPage'
 import PostDropPage from './pages/postPage/postDropPage.jsx'
 import DetailsPage from './pages/detailsPage/detailsPage'
-import UserPage from './pages/userPage/userPage'
 import NotificationPage from './pages/notificationPage/notificationPage.jsx'
 import { Switch, Route } from 'react-router-dom';
 import Header from './components/headerComponent/headerComponent'
@@ -30,8 +29,7 @@ function App() {
       <Header/>
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route exact path='/profile' component={ProfilePage} />
-          <Route exact path='/user/:uid' component={UserPage} />
+          <Route exact path='/profile/:username?' component={ProfilePage} />
           <Route exact path='/feed' component={FeedPage} />
           <Route exact path='/settings' component={SettingsPage} />
           <Route exact path='/post' component={PostDropPage} />

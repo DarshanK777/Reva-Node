@@ -30,9 +30,9 @@ export const loadProfileFeed = async () =>{
     }
 }
 
-export const loadUserProfileByUID = async (uid) =>{
+export const loadUserProfileByUsername = async (username) =>{
     try{
-        const res = await axios.get(`${PORT_NO}/user/${uid}`, tokenConfig());
+        const res = await axios.get(`${PORT_NO}/user/${username}`, tokenConfig());
         return res.data
         
     }catch(error){
@@ -49,6 +49,19 @@ export const loadProfileFeedByUID = async (uid) =>{
         const res = await axios.get(`${PORT_NO}/user/post/${uid}`, tokenConfig());
         return res.data
         
+    }catch(error){
+        if (error.response) {
+            return {
+                errors : error.response.data
+            }
+        } 
+    }
+}
+
+export const followUser = async (uid) =>{
+    try{
+        const res = await axios.post(`${PORT_NO}/friends/${uid}`, null,tokenConfig());
+        return res.data
     }catch(error){
         if (error.response) {
             return {

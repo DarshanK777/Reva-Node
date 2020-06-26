@@ -2,6 +2,7 @@
 const express = require('express')
 const User = require('../models/user')
 // const Post = require('../models/post')
+const Friends = require('../models/friendSys')
 const router = express.Router()
 const authMiddleware = require('../utils/middlewares/auth')
 const multer = require('multer')
@@ -16,21 +17,21 @@ router.get('/me', authMiddleware ,async (req, res)=>{
     
 })
 
-// read user by id
-router.get('/:id', authMiddleware, async (req, res)=>{
-    const _id = req.params.id
+// read user by username
+router.get('/:username', authMiddleware, async (req, res)=>{
+    const username = req.params.username
     try{
-        const user = await User.findById(_id)
+        const user = await User.findOne({username: username })
         if(!user){
             return res.status(404).send("User not found")
         }
+        const friends = await Friends.exists({user_id : req.user._id, following_user_id : user._id})
 
-        res.send(user)
+        res.send({...user.toJSON(), following : friends})
     } catch(e){
         res.status(500).send("Internal server error")
     }
 })
-
 
 //update user
 router.patch('/me', authMiddleware, async (req, res)=>{

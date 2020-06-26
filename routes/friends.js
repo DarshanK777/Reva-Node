@@ -7,7 +7,6 @@ const authMiddleware = require('../utils/middlewares/auth')
 // adding friends and removing friends
 router.post('/:id', authMiddleware, async (req, res)=>{
     try{
-
         const check = await Friends.findOne({user_id : req.user._id, following_user_id: req.params.id})
         console.log(check)
         if(!check){
@@ -16,16 +15,16 @@ router.post('/:id', authMiddleware, async (req, res)=>{
                 following_user_id : req.params.id
             })
             await friends.save()
-            return res.status(200).send('added friend')
+            return res.status(200).send({'status' : 'added'})
         }
 
         Friends.deleteOne(check, function(err){
             if(err) console.log(err)
             console.log('deleted friend')
         })
-        return res.send({
-            msg: 'deleted friends'
-        })
+        return res.send(
+            {'status' : 'deleted'}
+        )
 
     }catch(err){
         res.status(404).send()
